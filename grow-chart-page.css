@@ -171,12 +171,15 @@
 				cursor:pointer;
 				font-size: 18px;
 			}
-			.grc-scroll-plant:hover{
+			.grc-scroll-plant.active,
+			.grc-scroll-plant.active .grc-scroll-plant-img{
+				background-color: #D8EBCB;
+			}
+			
+			.grc-scroll-plant:hover,
+			.grc-scroll-plant:hover .grc-scroll-plant-img{
 				background-color: #D1C9DE;
 			}
-				.grc-scroll-plant:hover .grc-scroll-plant-img{
-					background-color: #D1C9DE;
-				}
 
 				.grc-scroll-plant-img{
 					position: absolute;

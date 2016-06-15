@@ -42,6 +42,14 @@ TOOLS
 		targetElement.className += prefixedSpace + className;
 	}
 
+	var Find_Class = function(targetElement, className){
+		var regex = new RegExp( "^(" + className + ")|\\s+(" + className + ")", "g" );
+		if (targetElement.className.match(regex)){
+			return true;
+		}
+		return false;
+	}
+
 	/*------------------------
 	REMOVE CLASS
 	------------------------*/	
@@ -102,7 +110,8 @@ MAIN
 						break;
 					}
 				}
-				console.log(clickedElement); //use this to show the plant
+				//console.log(clickedElement); //use this to show the plant
+				PlantClicked(clickedElement);
 			});
 			
 		}
@@ -144,7 +153,12 @@ MAIN
 			}
 		}
 		
-		function PlantClicked(event){
+		function PlantClicked(element){
+			if (Find_Class(element, 'active')){
+				Remove_Class(element, 'active');
+			}else{
+				Add_Class(element, 'active');
+			}
 		}
 
 		Init();
