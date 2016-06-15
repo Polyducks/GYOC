@@ -1,0 +1,109 @@
+/*
+								|                   __.         |
+								|                 (())          |
+								|             ()==/#/==()       |
+								|        ._______/#/____.       |
+								|   .___(___ANCHOR_TO___)___.   |
+								|  .>____)     /#/     (____<.  |
+								|       __    /#/  __           |
+								|       ; '-_/#/_-'.'           |
+								|        '-______-'             |
+								|                               |
+	
+	ANCHOR TO allows the user to move to a point in the document based on an element's ID.
+	To move to an item, you use a selector just like in CSS, like so:
+	
+		anchorto('#my-div');
+		
+	You can adjust the position up or down by adding or subtracting pixels. This makes the
+	page scroll to ten pixels above a div:
+	
+		anchorto('#my-div', -10);
+		
+	You can also animate the transition by adding a 'true' at the end, like so:
+	
+		anchorto('#my-div', 0, true);
+		
+	A simple way to use this might be:
+	
+		<div onClick = "anchorto('#my-div', 10, false)">Go to my-div</div>
+		
+	Which moves to ten pixels below #my-div without an animation.
+	
+	Please note that the command 'anchorto' must be all lowercase
+*/
+
+
+var anchorto = function(selector, yOffset, animate){
+
+	var timeline; //the interval holder
+	var timelineCount = 0; //counts the interval loops
+	function clearTimeline(){ //reset the interval holder and loop counter
+		clearInterval(timeline);
+		timeline = null;
+		timelineCount = 0;
+	}
+
+	//yOffset is optional. If not declared, it defaults to 0.
+	if (typeof yOffset === 'undefined'){
+		yOffset = 0;
+	}
+	//animate is optional. If not declared, it defaults to false.
+	if (typeof animate === 'undefined'){
+		animate = false;
+	}
+	
+	//get the first element that matches the selector
+	var element = document.querySelectorAll(selector)[0];
+	//calculate top by the element's position and the yOffset
+	var top = element.offsetTop + parseInt(yOffset);
+	
+	if (!animate){ //if the transition is not animated...
+	
+		clearTimeline(); //clear existing animations
+		window.scrollTo(0,top); //scroll to the position directly
+		
+	}else{ //if the transition is animated...
+		//set the interval for the animation
+		timeline = setInterval(
+			function(){
+				//get the difference between current and desired position. Divide by ten
+				var movement = (top - window.pageYOffset)/10;
+				if (movement > 0){	//if scrolling from top, round up
+					movement = Math.ceil(movement);
+				}else{				//if scrolling from bottom, round down
+					movement = Math.floor(movement);
+				}
+				//add the movement to the current scroll position, which inches closer to the target each iteration
+				window.scrollTo(0,window.pageYOffset + movement);
+				timelineCount++;
+				//If the timelineCount is more than a hundred, or the movement has stopped
+				if (timelineCount >= 100 || movement === 0){
+					//clear the animation
+					clearTimeline();
+					//finish the scroll just in case it wasn't managed in the code
+					window.scrollTo(0,top);
+				}
+			}, 1
+		);
+		
+	}
+}
+
+/*if(document.readyState === "complete"){
+		var windowLoc = window.location.href;
+		var regex = /#.*\b/;
+		var targetElement = windowLoc.match(regex);
+		if ( targetElement.length > 0 ){
+			anchorto( targetElement, 470, true);
+		}
+}else{
+	document.addEventListener("DOMContentLoaded", function() {
+			var windowLoc = window.location.href;
+			var regex = /#.*\b/;
+			var targetElement = windowLoc.match(regex);
+			if ( targetElement.length > 1 ){
+				anchorto( targetElement, 470, true);
+			}
+	});
+}*/

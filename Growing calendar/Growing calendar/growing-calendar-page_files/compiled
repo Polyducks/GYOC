@@ -1,0 +1,488 @@
+/*	POKE
+						,_________________,
+						|   .             |....
+						| ./ \.    O  ,   ||||| 
+						|/     \.   ./ \. |||||
+						|        \./     \||||| 
+						|          \.     ||||| 
+						;____________\____;|||| 
+						    |||||||||||||||||||
+						    '''''''''''''''''''
+
+	Making html and CSS do things it wouldn't normally
+	------------------------------------------------------------		
+		Previous work had been done to make a lightbox purely in CSS.
+		While this effort by Becky Smith was admirable (and worked, no less!), 
+		the iframe caused significant issues for the project and prevented the 
+		function. In an effort to alieviate the reliance on anchor tags, 
+		POKE.js was born.
+		
+		Wherever POKE.js is applied to the HTML, clicking that element will
+		cause specified elements to gain a new class. Using CSS, the editor
+		can then alter what this added class can do.
+	
+	SYNTAX
+	------------------------------------------------------------
+	
+	poke(action, selector, classname)
+	
+	ACTION
+	The action can be 'only', 'add' or 'remove'.
+		only 	- removes the class from other element and applies it to the element(s).
+		add 	- adds the class to the element(s) without removing it from others
+		remove	- removes the class from the specified element(s)
+	
+	SELECTOR
+	The selector can be any css selector which isn't a pseudoclass.
+		As an example, '.red-box', '#house .dog'.
+		
+	CLASSNAME
+	The classname is optional. This is the classname which will get added to the elements.
+	If no classname is set, the default is '.poked'.
+	
+	In situ:
+	<div onClick = "poke(['only' / 'add' / 'remove'], '[selectors]', ('replacing class'))"> </div>
+	
+	
+	HTML DEMOS
+	------------------------------------------------------------
+			<div onClick = "poke('only', '.carrot')" ></div>
+		
+		This specific example adds the class 'poked' to all .carrot elements,
+		removing the class from any other elements.
+		
+			<div onClick = "poke('add', '#bowl .carrot', 'eaten')" ></div>
+			
+		This example adds the class 'eaten' to all .carrot elements which are 
+		inside the #bowl element without first removing the class .eaten from
+		any other elements. You can make the list of selectors as long as you
+		like, but it's not possible to use pseudoselectors. If you don't know
+		what these are, you're probably fine.
+		
+			<div onmouseout = "poke('remove', '#bowl', 'touched')" ></div>
+			
+		This example removes the class 'touched' from the div #bowl.
+	
+	DEBUGGING
+	------------------------------------------------------------
+		To access debugging mode, you can type
+		
+			pokeDebugMode = true
+		
+		into the console. When this is done, any item which uses
+		poke.js will show status messages in the console.
+	
+---------------------------------------------------------------*/
+
+//console shim
+if (typeof console === "undefined"){
+    console={};
+    console.log = function(){
+        return;
+    }
+}
+
+var pokeDebugMode = false;
+
+function poke( action, selector, classname ){
+	
+	//the class that's printed onto the selected element. Default is 'poked'
+	classname = classname || "poked";
+	action = action || "must include an action: 'only', 'add' or 'remove'";
+	selector = selector || "didn't include any CSS selectors";
+	action = action.toString().toLowerCase();
+	selector = selector.toString();
+	var author = "Polyducks";
+	
+	//functions used in the select below
+	//-------------------------------------------------
+	//remove all old versions of this class	
+	var remove = function(wipeAll){
+		var oldItems;
+		//if 'only' has been activated, it's going to true 'wipeAll' and wipe everything that matches the newly asigned class
+		if (wipeAll){
+			oldItems = document.querySelectorAll( "." + classname );
+		}else{
+			//if it's only a 'remove', then it wipes the class based on the selector
+			oldItems = document.querySelectorAll( selector );
+		}
+		//match a class name which may contain 0-1 leading white spaces and is a whole word
+		var regex = new RegExp('\\s?\\b' + classname +'\\b','g');
+		for (var i = 0; i < oldItems.length; i ++){
+			//removes the classname as long as there's a leading space
+			oldItems[i].className = oldItems[i].className.replace( regex, "" );
+		}
+		if (pokeDebugMode){ // try/catch used here to prevent a failure if the browser has no console
+			if (wipeAll){
+				console.log("POKE: The class ." + classname + " has been removed from all elements matching '." + classname + "'.");
+			}else{
+				console.log("POKE: The class ." + classname + " has been removed from all elements matching '" + selector + "'.");
+			}
+		}
+	};
+	//add new classes to selected elements
+	var add = function(){
+		var newItems = document.querySelectorAll( selector );
+		for (var i = 0; i < newItems.length; i ++){
+			newItems[i].className += " " + classname;
+		}
+		if (pokeDebugMode){
+			console.log("POKE: The class ." + classname + " has been added to all elements matching '" + selector + "'.");
+		}
+	};
+	//-------------------------------------------------
+	
+	switch (action){
+		case "only":	//only shows one set of items, removing any before
+			remove(true);
+		case "add":		//shows one set of items without removing any before
+			add();
+			break;
+		case "remove":	//hide all the shown items
+			remove(false);
+			break;
+		default:
+		//error;
+		if (pokeDebugMode){
+			console.log("POKE: The script returned these errors: (" + action + ", " + selector + ", new classname is '" + classname +  "')");
+		}
+	}
+}
+
+/*
+								|                   __.         |
+								|                 (())          |
+								|             ()==/#/==()       |
+								|        ._______/#/____.       |
+								|   .___(___ANCHOR_TO___)___.   |
+								|  .>____)     /#/     (____<.  |
+								|       __    /#/  __           |
+								|       ; '-_/#/_-'.'           |
+								|        '-______-'             |
+								|                               |
+	
+	ANCHOR TO allows the user to move to a point in the document based on an element's ID.
+	To move to an item, you use a selector just like in CSS, like so:
+	
+		anchorto('#my-div');
+		
+	You can adjust the position up or down by adding or subtracting pixels. This makes the
+	page scroll to ten pixels above a div:
+	
+		anchorto('#my-div', -10);
+		
+	You can also animate the transition by adding a 'true' at the end, like so:
+	
+		anchorto('#my-div', 0, true);
+		
+	A simple way to use this might be:
+	
+		<div onClick = "anchorto('#my-div', 10, false)">Go to my-div</div>
+		
+	Which moves to ten pixels below #my-div without an animation.
+	
+	Please note that the command 'anchorto' must be all lowercase
+*/
+var anchorto = function(selector, yOffset, animate){
+
+	var timeline; //the interval holder
+	var timelineCount = 0; //counts the interval loops
+	function clearTimeline(){ //reset the interval holder and loop counter
+		clearInterval(timeline);
+		timeline = null;
+		timelineCount = 0;
+	}
+
+	//yOffset is optional. If not declared, it defaults to 0.
+	if (typeof yOffset === 'undefined'){
+		yOffset = 0;
+	}
+	//animate is optional. If not declared, it defaults to false.
+	if (typeof animate === 'undefined'){
+		animate = false;
+	}
+	
+	//get the first element that matches the selector
+	var element = document.querySelectorAll(selector)[0];
+	//calculate top by the element's position and the yOffset
+	var top = element.offsetTop + parseInt(yOffset);
+	
+	if (!animate){ //if the transition is not animated...
+	
+		clearTimeline(); //clear existing animations
+		window.scrollTo(0,top); //scroll to the position directly
+		
+	}else{ //if the transition is animated...
+		//set the interval for the animation
+		timeline = setInterval(
+			function(){
+				//get the difference between current and desired position. Divide by ten
+				var movement = (top - window.pageYOffset)/10;
+				if (movement > 0){	//if scrolling from top, round up
+					movement = Math.ceil(movement);
+				}else{				//if scrolling from bottom, round down
+					movement = Math.floor(movement);
+				}
+				//add the movement to the current scroll position, which inches closer to the target each iteration
+				window.scrollTo(0,window.pageYOffset + movement);
+				timelineCount++;
+				//If the timelineCount is more than a hundred, or the movement has stopped
+				if (timelineCount >= 100 || movement === 0){
+					//clear the animation
+					clearTimeline();
+					//finish the scroll just in case it wasn't managed in the code
+					window.scrollTo(0,top);
+				}
+			}, 1
+		);
+		
+	}
+}
+
+if(document.readyState === "complete"){
+		var windowLoc = window.location.href;
+		var regex = /#.*\b/;
+		var targetElement = windowLoc.match(regex);
+		if ( targetElement.length > 0 ){
+			anchorto( targetElement, 470, true);
+		}
+}else{
+	document.addEventListener("DOMContentLoaded", function() {
+			var windowLoc = window.location.href;
+			var regex = /#.*\b/;
+			var targetElement = windowLoc.match(regex);
+			if ( targetElement.length > 1 ){
+				anchorto( targetElement, 470, true);
+			}
+	});
+}
+/*
+								,_____________________________,
+								|         SHOWSTOPPER         |
+								;__________,__________________;
+								|       /  /:::^:::\  \       |
+								|         ;:::' '::::         |
+								|        /:::'   ':::\        |
+								| :     /:::'     ':::\     : |
+								| | / ./:::'     y '::::. \ | |
+								| |/ /::::'    O/   '::::\ \| |
+								|===(::::'    /|     '::::)===|
+								| |\ \:::.    /'\    .:::/ /| |
+								| ' ' \-----------------/ ' ' |
+								;~~~~~~:-n--n--n--n--n-:~~~~~~;
+								|||||||||||||||||||||||||||||||
+
+
+	ShowStopper is used alongside Wistia videos to stop all other videos when another begins playing.
+	It is activated automatically when a user clicks play on a video - pausing all the other videos.
+	It can be activated programatically to pause all the videos by calling 'showStopper.pauseAll();' -
+	which one might want to do when hiding or closing a video.
+	
+	_______________
+	TROUBLESHOOTING
+
+	___________________
+	* Embedding a video
+	
+	Go to Wistia.co.uk and chose your video, then embed it using the iframe option. It'll give you some
+	code to copy. You will need to change any links in this code to begin with "https://fast.wistia" instead
+	of "//fast.wistia". There will be two links you have to change.
+	
+	__________________________________
+	* An example of pausing all videos
+
+	Say, for example, you want to have a 'pause all videos' button. The HTML might look something like
+	this:
+	
+		<button id="pause-button" onClick = "showStopper.pauseAll()">Pause All</button>
+
+*/
+
+function SHOWSTOPPER(){
+
+	var global = {};
+	
+	//get all the videos once the page is in a 'ready' state
+	global.initialise = function(){
+		global.videos = document.getElementsByClassName("wistia_embed"); // get all videos by the default class
+		global.videos = Array.prototype.slice.call( global.videos ); // converts NodeList to Array
+		global.api = {};
+		
+		
+		for (var i = 0; i < global.videos.length; i++){
+			
+			global.videos[i].setAttribute("data-showstopper-value", i);
+			
+			global.videos[i].addEventListener("load", function(){
+				
+				var showStopperValue = this.getAttribute("data-showstopper-value");
+				global.api[ showStopperValue ] = global.videos[ showStopperValue ].wistiaApi;
+				global.api[ showStopperValue ].bind("play", function(){
+					global.pauseAll( showStopperValue );
+				});
+				
+			});
+		}
+	}
+	
+	//pause everything except the exception
+	global.pauseAll = function(exception){
+		for (var i = 0; i < global.videos.length; i++){
+			if (i != exception){
+				global.api[i].pause();
+			}
+		}
+	}
+	
+	return global;
+
+}
+
+var showStopper = SHOWSTOPPER();
+
+if(document.readyState === "complete"){
+	showStopper.initialise();
+}else{
+	document.addEventListener("DOMContentLoaded", function() {
+		showStopper.initialise();
+	});
+}
+
+
+	/*	
+		.______________________________________,
+		|                                      |\
+		|   _,--,--'""''---._    ,-'      ,    |||
+		|  /     (  _._      '-,//{  \\\  |}   |||
+		| /_ (X) (" __  """'--,_//{,  ||  |/   |||
+		| \ \    ( /='          \\{'  ||  ||   |||
+		|  \_    (          _,-'\\{   ||  ||   |||
+		|    '--'--..,,.--"'     '-,  []  []   |||
+		;______________________________________;||
+		|                TARTAR                |||
+		;______________________________________;||
+		 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
+
+		Changing the source (sauce) of an iframe
+		
+		_____________________________________________________________________________________________________
+		WHY?
+		This is used to prevent all the videos being loaded at once - instead loading them into the iframe
+		when they're requested. It prevents causing a massive lag to the user by loading content they might
+		not want anyway.
+		
+		It also acts as a playlist of sorts.
+		_____________________________________________________________________________________________________
+		HOW?
+		The program relies on there being an iframe element in the html with the ID 'tartar-display-frame'
+		and buttons to load content which have the data tag 'data-tartar-url'. The data tag should have
+		the url of the iframed Wistia video content.
+		
+		This is the iframe as presented by Wistia with the iframe source removed and the script tag stripped:
+		
+			<div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+				<div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+					<iframe id="tartar-display-frame" src="" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="100%" height="100%"></iframe>
+				</div>
+			</div>
+			
+		You can literally copy and paste the above into your code and it'll function as required. This 
+		should go where you want the video displayed.
+		
+		The second element(s) you'll need is a video play link stripped to its basic elements:
+		
+		<div data-tartar-url="https://fast.wistia.net/embed/iframe/prli8hb493?videoFoam=true"></div>
+		
+		It does not have to be a div. It can be an image, a button or even a h3. Any element, so long as 
+		it has the data-tartar-url which contains a link to the iframed content. The iframe link can be 
+		taken from within the iframe code which is given on Wistia's iframe embed option.
+
+	*/
+	var TARTAR = function(){
+		var global = {};
+		
+		global.iframe;
+		global.videoList;
+		
+		global.initialise = function(){
+			
+		
+			//check to see if the wistia script is already loaded in the HTML
+			var hasLoaded = document.querySelectorAll("[src $= 'https://fast.wistia.net/assets/external/E-v1.js']");
+			//if not, append it to the head as a script tag
+			if (hasLoaded.length == 0){
+				var script = document.createElement('script');
+				script.src = 'https://fast.wistia.net/assets/external/E-v1.js';
+				document.head.appendChild(script);
+			}
+		
+			//find the iframe
+			global.iframe = document.getElementById("tartar-display-frame");
+			
+			//get all the tartar-video-thumbnail divs
+			global.videoList = Array.prototype.slice.call( document.querySelectorAll("[data-tartar-url]") );
+			//add the event listeners
+			for (var i = 0; i < global.videoList.length; i++){
+				global.videoList[i].addEventListener("click", function(){
+					global.playThisVideo(this);
+				});
+			}
+		}
+		
+		global.playThisVideo = function(videoDiv){
+			global.iframe.src = videoDiv.getAttribute("data-tartar-url");
+		}
+		
+		return global;
+	}
+
+	try{
+		var tartar = TARTAR();
+
+		//Execute if the page has loaded or wait until the html is ready for modification.
+		if(document.readyState === "complete"){
+			tartar.initialise();
+		}else{
+			document.addEventListener("DOMContentLoaded", function() {
+				tartar.initialise();
+			});
+		}
+
+
+	}catch(err){
+		console.log("Tartar.js (a video loading script) encountered a bug and failed cleanly. (" + err + ")." );
+	}
+
+	/*
+
+		.______________________________________,
+		|                                      |\
+		|   _,--,    /  , .               ,    |||
+		|  /     (  :  / / /   /<;"  \\\  |}   |||
+		| /_ (X) (_| _:_:_:_  /{<     ||  |/   |||
+		| \ \    (=| =|=|=|="'{E=     ||  ||   |||
+		|  \_    (  \  ; ; :  \{<     ||  ||   |||
+		|    '--'    \  \ \ '  ':-.   []  []   |||
+		;______________________________________;||
+		|                TARTAR                |||
+		;______________________________________;||
+		 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
+
+	*/
+
+/*
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX| /XXXXXXXXXXXXXXXXXXX| /XXXXXXXXXXXXXXXX
+XXX|    \XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX| |XXXXXXXXXXXXXXXXXXX| |X/ /XXXXXXXXXXXX
+XXX| |x\ |XX/  \XX| /XXXX| /XX| /X/  __  |XX| /X| /XX/    \XX| |/ /XX/  __ \XXXX
+XXX| |./ |X| /\ |X| |XXXX| |XX| |X| |XX| |XX| |X| |XX| |X|_|X|   /XXX\ \XXXXXXXX
+XXX| .__/XX| () |X| |XXXX\ \XX| |X| |XX| |XX| |X| |XX| |XXXXX| \ \XXXX\__ \XXXXX
+XXX| |XXXXX\ \/ |X| |XXXXX\__.  /X| |XX| |XX| |X| |XX| |X| |X| |\ \XXXXXX\ \XXXX
+XXX|_\XXXXXX\__/XX|_____|XXXX/ /XX\.__ /\_\X\___/\ \X\____/XX| |X|_\X\_____/XXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXX\___/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXX       CODE WRITTEN BY POLYDUCKS       XXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXX         2014  -  2015          XXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+*/

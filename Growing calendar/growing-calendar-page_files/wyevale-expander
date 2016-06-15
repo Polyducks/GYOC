@@ -1,0 +1,117 @@
+/*
+
+	.___________.^._____________.
+	|          /_ _\            |
+	|         ' J|r '           |
+	|           |||             |
+	|           |||             |
+	|           |||             |
+	|         '.J|L.'           |
+	;__________\   /____________;
+                'V'
+
+	WYEVALE-EXPANDER
+
+	Despite the name, expander.js is actually very reliant on css3 transitions. This is functional CSS and an
+	aesthetic CSS which allows a vast array of tweaking. This CSS is located within the main style.css.
+	
+	EXPANDER.JS is compatible with modern browsers at the time of writing - as well as IE 9 (though without animation).
+	It degrades gracefully for stoneage browsers such as IE 8, where all 'tabs' are open by default. Hopefully these
+	devices using IE 8 will develop an irrepairable fault in good time and this will no longer be an issue.
+
+*/
+
+var EXPANDER = function(){
+	
+	var global = {};
+	
+	global.initialise = function(){
+		//when DOM is ready, scan for .collapse and .collapse-title classed divs to collapse them
+		expander.title = document.getElementsByClassName("collapse-title");
+		expander.container = Array.prototype.slice.call( document.querySelectorAll("#quick-links-wrapper .collapse") );
+		
+		//check if there are title and container divs
+		if (	(expander.title.length > 0) &&
+				(expander.container.length > 0)
+		){
+			
+			expander.loaded = true;
+			//The code pairs the titles with their containers. Better check there are equal amounts of each
+			if (expander.title.length != expander.container.length){
+				try{	//use 'try' here in case the browser doesn't support logging to console
+					if (expander.title.length > expander.container.length){
+						console.log("expander.js error: There are more .collapse-title divs than there are .collapse divs. Please review the HTML");
+					}else{
+						console.log("expander.js error: There are more .collapse divs than there are .collapse-title divs. Please review the HTML");
+					}
+				}catch(err){
+				}
+			//If no errors, continue
+			}else{
+			
+				if (!expander.title[0].getAttribute("data-toggle-status")){
+					//attach click event listeners to the title
+					for (var i = 0; i < expander.title.length; i++){
+					
+						if (expander.title[i].addEventListener) {							//for all proper browsers
+							expander.title[i].addEventListener("click", expander.toggle);
+						} else if (expander.title[i].attachEvent) {							//for IE8 in the miraculous event it has got this far.
+							expander.title[i].attachEvent("onclick", expander.toggle);
+						}
+						
+						//add that the piece is closed by default
+						expander.title[i].setAttribute('data-toggle-status','closed');
+						//clarify which item pair it belongs to
+						expander.title[i].setAttribute('data-pair', i.toString());
+						
+					}
+					
+					//open the first default
+					if (expander.container[0].className.indexOf('fold-default')>0){
+						expander.title[0].click();
+					}
+					
+					//open all default-open tabs
+					for (var i = 0; i < expander.container.length; i++){
+						if (expander.container[i].className.indexOf('fold-open')>0){
+							expander.title[i].click();
+						}
+					}
+				
+				}else{
+					console.log("expander.js error: This script has already run once, or the HTML is already populated with data-tags. Please rectify.");
+				}
+			
+			}
+			
+		}
+		
+	}
+	
+	//Toggle the element open or closed. The CSS then uses these data tags to apply open/closed CSS.
+	global.toggle = function(){
+		//first find out if it's open or closed
+		if (this.getAttribute('data-toggle-status')=='closed'){
+			
+			this.setAttribute('data-toggle-status', 'open');
+			
+		}else{	//if it's not closed, it's open... so we close it
+			
+			this.setAttribute('data-toggle-status', 'closed');
+			
+		}
+	}
+
+	return global;
+	
+}
+
+var expander = EXPANDER();
+
+if(document.readyState === "complete"){
+	expander.initialise();
+}else{
+	document.addEventListener("DOMContentLoaded", function() {
+		expander.initialise();
+	});
+}
