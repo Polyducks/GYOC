@@ -72,6 +72,11 @@ MAIN
 		//plantData set in growchart-data.js
 
 		/*--------------------------------------------
+		VARIABLES
+		--------------------------------------------*/
+		var chartArray = []; //array of ints
+
+		/*--------------------------------------------
 		SETTINGS
 		--------------------------------------------*/
 		var settings = {};
@@ -153,11 +158,18 @@ MAIN
 			}
 		}
 		
+		//WHEN A PLANT IN THE CAROUSEL IS CLICKED
 		function PlantClicked(element){
+			var plantID = parseInt(element.getAttribute("data-plant-id"));
 			if (Find_Class(element, 'active')){
 				Remove_Class(element, 'active');
+				var index = chartArray.indexOf( plantID );
+				chartArray.splice(index, 1);
+				console.log(chartArray);
 			}else{
 				Add_Class(element, 'active');
+				chartArray.push(plantID);
+				chartArray.sort();
 			}
 		}
 
