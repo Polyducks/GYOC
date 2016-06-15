@@ -172,6 +172,11 @@ MAIN
 				chartArray.sort();
 			}
 		}
+		
+		//POPULATE THE CHART
+		function PopulateChart(){
+			
+		}
 
 		Init();
 		
