@@ -88,6 +88,8 @@ MAIN
 		var el = {};
 			el.scrollContainer = document.getElementById("grc-scroll-element-container");
 			el.plantsArray = [];
+			el.chart = document.getElementById("grc-table");
+			el.chart.rows = document.getElementById("grc-data-rows");
 		
 		/*--------------------------------------------
 		INITIALISE
@@ -171,11 +173,37 @@ MAIN
 				chartArray.push(plantID);
 				chartArray.sort();
 			}
+			PopulateChart();
+		}
+		
+		//CLEAR THE CHART
+		function ClearChart(){
+			el.chart.rows.innerHTML = "";
 		}
 		
 		//POPULATE THE CHART
 		function PopulateChart(){
+			ClearChart();
 			
+			//FUNCTIONS TO ADD ROWS AND CELLS
+			function AddRow(plantID){
+				var row = document.createElement("DIV");
+				row.className = "grc-row";
+				//ADD CELLS
+				for ( var j = 0; j < 13; j++ ){
+					var cell = document.createElement("DIV");
+					cell.className = "grc-cell";
+					row.appendChild(cell);
+				}
+				var children = row.children;
+				children[0].innerHTML = plantData[plantID].name;
+				el.chart.rows.appendChild(row);
+			}
+			
+			//loop through the chart array
+			for ( var i = 0; i < chartArray.length; i++ ){
+				AddRow(chartArray[i]);
+			}
 		}
 
 		Init();
