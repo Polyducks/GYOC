@@ -81,6 +81,7 @@ MAIN
 		--------------------------------------------*/
 		var settings = {};
 			settings.plantPercentWidth = 20;
+			settings.location = "north"; //or south
 		
 		/*--------------------------------------------
 		VARIABLES
@@ -235,6 +236,18 @@ MAIN
 				}
 				var children = row.children;
 				children[0].innerHTML = plantData[plantID].name;
+				for ( var j = 1; j < 13; j++ ){
+					//grab the grow data for the north or south of England
+					var locationGrowData;
+					if (settings.location == "south"){
+						locationGrowData = plantData[plantID].south;
+					}else{
+						locationGrowData = plantData[plantID].north;
+					}
+					//output the cell's class based on the grow data
+					var monthClass = "grc-symbol-" + locationGrowData[j-1];
+					Add_Class(children[j], monthClass);
+				}
 				el.chart.rows.appendChild(row);
 			}
 			

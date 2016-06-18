@@ -28,14 +28,17 @@
 		padding: 7px;
 		margin: 0 5px;
 		color: white;
+		cursor: pointer;
 	}
 		.grc-button .grc-button-icon{
 			height: 1em;
 			width: 1em;
 			display: inline-block;
-			background-color: black;
 			vertical-align: middle;
 			margin-right: 0.5em;
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
 		}
 	
 	/*----------------------------
@@ -49,15 +52,38 @@
 		/*------------------------
 		BUTTONS
 		------------------------*/
-		#grc-chart-button{
-			background-color: #64A70A;
-		}
-		#grc-buy-button{
-			background-color: #F15B29;
-		}
-		#grc-article-button{
-			background-color: #554744;
-		}
+		/* ADD TO CHART */
+			#grc-chart-button{
+				background-color: #64A70A;
+			}
+			#grc-chart-button:hover{
+				background-color: #539609;
+			}
+				#grc-chart-button .grc-button-icon{
+					background-image: url('resources/placeholder.png');
+				}
+		
+		/* BUY */
+			#grc-buy-button{
+				background-color: #F15B29;
+			}
+			#grc-buy-button:hover{
+				background-color: #E04A18;
+			}
+				#grc-buy-button .grc-button-icon{
+					background-image: url('resources/placeholder.png');
+				}
+		
+		/* SEE ARTICLE */
+			#grc-article-button{
+				background-color: #554744;
+			}
+			#grc-article-button:hover{
+				background-color: #443633;
+			}
+				#grc-article-button .grc-button-icon{
+					background-image: url('resources/placeholder.png');
+				}
 	
 	/*------------------------------------------------------
 	SLIDER
@@ -220,6 +246,18 @@
 		#grc-print{
 			float: right;
 		}
+		#grc-key{
+			width: 100%;
+			background-color: #4C2079;
+			padding: 10px;
+			box-sizing: border-box;
+			float: left;
+			clear: both;
+			margin-bottom: 10px;
+			overflow: auto;
+			color: white;
+		}
+		
 		
 		#grc-table{
 			display: block;
@@ -238,10 +276,34 @@
 					height: 40px;
 					float: left;
 					background-color: #EBE8F1;
+					background-size: contain;
+					background-position: center;
+					background-repeat: no-repeat;
 				}
 				.grc-row .grc-cell:nth-of-type(even){
 					background-color: #D1C9DE;
 				}
+				/* CHART SYMBOLS */
+				.grc-row .grc-cell.grc-symbol-NO{ /* an empty chart symbol */
+				}
+				.grc-row .grc-cell.grc-symbol-SI{ /* sow indoors */
+					background-image: url(resources/placeholder.png);
+				}
+				.grc-row .grc-cell.grc-symbol-SC{ /* sow under cloche */
+					background-image: url(resources/placeholder.png);
+				}
+				.grc-row .grc-cell.grc-symbol-SO{ /* sow outdoors */
+					background-image: url(resources/placeholder.png);
+				}
+				.grc-row .grc-cell.grc-symbol-PI{ /* plant indoors */
+					background-image: url(resources/placeholder.png);
+				}
+				.grc-row .grc-cell.grc-symbol-PO{ /* plant outdoors */
+					background-image: url(resources/placeholder.png);
+				}
+				.grc-row .grc-cell.grc-symbol-HR{ /* harvest */
+					background-image: url(resources/placeholder.png);
+				}				
 				
 				/* HEADER SPECIFIC */
 				#grc-top-row .grc-cell:before{
@@ -266,17 +328,3 @@
 					#grc-top-row .grc-cell:nth-of-type(12):before{content:"Nov";}
 					#grc-top-row .grc-cell:nth-of-type(13):before{content:"Dec";}
 					
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
