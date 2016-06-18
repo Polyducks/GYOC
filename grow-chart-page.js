@@ -85,8 +85,14 @@ MAIN
 		/*--------------------------------------------
 		VARIABLES
 		--------------------------------------------*/
+		var selected = 0; //the vegetable which is currently selected
+		var scrollAmount = 0; //how far the selector is scrolled by
+		
 		var el = {};
 			el.scrollContainer = document.getElementById("grc-scroll-element-container");
+			el.scrollPlants = document.getElementsByClassName("grc-scroll-plant");
+			el.scrollLeft = document.getElementById("grc-scroll-left");
+			el.scrollRight = document.getElementById("grc-scroll-right");
 			el.plantsArray = [];
 			el.chart = document.getElementById("grc-table");
 			el.chart.rows = document.getElementById("grc-data-rows");
@@ -117,12 +123,30 @@ MAIN
 						break;
 					}
 				}
-				//console.log(clickedElement); //use this to show the plant
+				console.log(clickPath);
 				PlantClicked(clickedElement);
+			});
+			el.scrollLeft.addEventListener("click", function(){
+				var amount = scrollAmount + settings.plantPercentWidth;
+				if (amount <= 0){ //prevent it from going too far left
+					SetScroll(amount);
+				}
+			});
+			el.scrollRight.addEventListener("click", function(){
+				var amount = scrollAmount - settings.plantPercentWidth;
+				//work out furthest right edge
+				var maxAmount = -(el.scrollPlants.length * settings.plantPercentWidth);
+				//adjust to have the final item hard against the right edge
+				var AmountOfLastVisibleItems = 100 / settings.plantPercentWidth;
+				maxAmount += settings.plantPercentWidth * AmountOfLastVisibleItems;
+				if (amount >= maxAmount){ //prevent it from going too far right
+					SetScroll(amount);
+				}
 			});
 			
 		}
 		
+		//POPULATE THE PLANT MENU
 		function PopulatePlants(){
 			
 			//function used for creating new plant elements
@@ -160,6 +184,17 @@ MAIN
 			}
 		}
 		
+		
+		//SCROLL THE PLANT MENU
+		function SetScroll(amount){
+			scrollAmount = amount;
+			for (var i = 0; i < el.scrollPlants.length; i++){
+				var left = settings.plantPercentWidth * i;
+				el.scrollPlants[i].style.left = (left + scrollAmount) + "%";
+			}
+			console.log(scrollAmount);
+		}
+		
 		//WHEN A PLANT IN THE CAROUSEL IS CLICKED
 		function PlantClicked(element){
 			var plantID = parseInt(element.getAttribute("data-plant-id"));
@@ -167,7 +202,6 @@ MAIN
 				Remove_Class(element, 'active');
 				var index = chartArray.indexOf( plantID );
 				chartArray.splice(index, 1);
-				console.log(chartArray);
 			}else{
 				Add_Class(element, 'active');
 				chartArray.push(plantID);
@@ -175,6 +209,10 @@ MAIN
 			}
 			PopulateChart();
 		}
+		
+		//----------------------------------
+		//CHART FUNCTIONS
+		//----------------------------------
 		
 		//CLEAR THE CHART
 		function ClearChart(){
