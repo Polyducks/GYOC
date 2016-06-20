@@ -14,9 +14,9 @@ var plantData = [
 	{
 		"name" 			: "Aubergine",
 		"img"			: "http://i1.adis.ws/i/wgc/veg000",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -31,9 +31,9 @@ var plantData = [
 	{
 		"name" 			: "Basil",
 		"img"			: "http://i1.adis.ws/i/wgc/veg001",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -48,9 +48,9 @@ var plantData = [
 	{
 		"name" 			: "Beetroot",
 		"img"			: "http://i1.adis.ws/i/wgc/veg002",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -65,9 +65,9 @@ var plantData = [
 	{
 		"name" 			: "Broccoli",
 		"img"			: "http://i1.adis.ws/i/wgc/veg003",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -82,9 +82,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -99,9 +99,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -116,9 +116,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -133,9 +133,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -150,9 +150,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -167,9 +167,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -184,9 +184,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -201,9 +201,9 @@ var plantData = [
 	{
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
@@ -218,9 +218,9 @@ var plantData = [
 	{
 		"name" 			: "Last Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
-		"buy_link"		: "www.google.co.uk",
+		"buy_link"		: "http://www.google.co.uk",
 		"article_title" : "Grow Aubergine for fun and profit",
-		"article_link" 	: "www.google.co.uk",
+		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC

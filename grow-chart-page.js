@@ -52,15 +52,13 @@ TOOLS
 
 	/*------------------------
 	REMOVE CLASS
-	------------------------*/	
+	------------------------*/
 	var Remove_Class = function(targetElement, className){
 		// Make a regex that matches the classname with or without the space
 		// ^(className)|\s+(className)
 		var regex = new RegExp( "^(" + className + ")|\\s+(" + className + ")", "g" );
 		targetElement.className = targetElement.className.replace( regex, "");
 	}
-
-
 
 /*-------------------------------------------------------------
 MAIN
@@ -95,6 +93,11 @@ MAIN
 			el.scrollLeft = document.getElementById("grc-scroll-left");
 			el.scrollRight = document.getElementById("grc-scroll-right");
 			el.plantsArray = [];
+			
+			el.chartButton = document.getElementById("grc-chart-button");
+			el.buyButton = document.getElementById("grc-buy-button");
+			el.articleButton = document.getElementById("grc-article-button");
+			
 			el.chart = document.getElementById("grc-table");
 			el.chart.rows = document.getElementById("grc-data-rows");
 		
@@ -113,6 +116,9 @@ MAIN
 				}
 				return path;
 			}
+			
+			//REDIRECT CLICKS TO THE SCROLL CONTAINER TO THE RIGHT ITEM
+			//this saves adding an event listener to every item in the chart
 			el.scrollContainer.addEventListener("click", function(e){
 				var clickedElement;
 				var clickPath = handleClicks(e);
@@ -124,15 +130,18 @@ MAIN
 						break;
 					}
 				}
-				console.log(clickPath);
 				PlantClicked(clickedElement);
 			});
+			
+			//SCROLL LEFT
 			el.scrollLeft.addEventListener("click", function(){
 				var amount = scrollAmount + settings.plantPercentWidth;
 				if (amount <= 0){ //prevent it from going too far left
 					SetScroll(amount);
 				}
 			});
+			
+			//SCROLL RIGHT
 			el.scrollRight.addEventListener("click", function(){
 				var amount = scrollAmount - settings.plantPercentWidth;
 				//work out furthest right edge
@@ -143,6 +152,45 @@ MAIN
 				if (amount >= maxAmount){ //prevent it from going too far right
 					SetScroll(amount);
 				}
+			});
+
+			/*------------------------
+			CHECK IF ITEM IS IN CHART
+			------------------------*/
+			var ItemInChart = function( plantID ){
+				var index = chartArray.indexOf( plantID );
+				if ( index == -1 ){
+					return false;
+				}
+				return index;
+			}
+
+			//BUTTON TO ADD/REMOVE PLANTS
+			el.chartButton.addEventListener("click", function(){
+				var plantID = parseInt(this.getAttribute("data-plant-id"));
+				//check to see if the item is in the chart
+				var chartLocation = ItemInChart( plantID );
+				if (chartLocation){//is in chart
+					chartArray.splice(chartLocation, 1);
+				}else{
+					chartArray.push( plantID );
+					chartArray.sort();
+				}
+				
+				//make a function to add/remove the the class
+				//to visually style this. Return whether it's already
+				//in the array
+				
+				/*if (Find_Class(this, 'in-chart')){
+					Remove_Class(this, 'in-chart');
+					var index = chartArray.indexOf( plantID );
+					chartArray.splice(index, 1);
+				}else{
+					Add_Class(this, 'in-chart');
+					chartArray.push( plantID );
+					chartArray.sort();
+				}*/
+				PopulateChart();
 			});
 			
 		}
@@ -193,22 +241,21 @@ MAIN
 				var left = settings.plantPercentWidth * i;
 				el.scrollPlants[i].style.left = (left + scrollAmount) + "%";
 			}
-			console.log(scrollAmount);
 		}
 		
 		//WHEN A PLANT IN THE CAROUSEL IS CLICKED
 		function PlantClicked(element){
 			var plantID = parseInt(element.getAttribute("data-plant-id"));
-			if (Find_Class(element, 'active')){
-				Remove_Class(element, 'active');
-				var index = chartArray.indexOf( plantID );
-				chartArray.splice(index, 1);
-			}else{
-				Add_Class(element, 'active');
-				chartArray.push(plantID);
-				chartArray.sort();
+			var currentlySelected = document.getElementsByClassName("selected");
+			for (var i = 0; i < currentlySelected.length; i++){
+				Remove_Class(currentlySelected[i], "selected");
 			}
-			PopulateChart();
+			Add_Class(element, 'selected');
+			selected = plantID;
+			//populate the buttons with relevant content
+			el.chartButton.setAttribute("data-plant-id", plantID);
+			el.buyButton.href = plantData[plantID].buy_link;
+			el.articleButton.href = plantData[plantID].article_link;
 		}
 		
 		//----------------------------------

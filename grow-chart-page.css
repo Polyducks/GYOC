@@ -3,7 +3,7 @@
 
 /* GROW CHART V3 CSS */
 
-/* TESTING ONLY */
+/* TESTING ONLY - remove for live */
 #grc{
 	max-width: 1248px;
 	margin: 0 auto;
@@ -29,6 +29,7 @@
 		margin: 0 5px;
 		color: white;
 		cursor: pointer;
+		text-decoration: none;
 	}
 		.grc-button .grc-button-icon{
 			height: 1em;
@@ -205,10 +206,13 @@
 			.grc-scroll-plant.active .grc-scroll-plant-img{
 				background-color: #D8EBCB;
 			}
-			
 			.grc-scroll-plant:hover,
 			.grc-scroll-plant:hover .grc-scroll-plant-img{
 				background-color: #D1C9DE;
+			}
+			.grc-scroll-plant.selected,
+			.grc-scroll-plant.selected .grc-scroll-plant-img{
+				background-color: #B0A3C6;
 			}
 
 				.grc-scroll-plant-img{
@@ -279,6 +283,7 @@
 					background-size: contain;
 					background-position: center;
 					background-repeat: no-repeat;
+					text-align: center;
 				}
 				.grc-row .grc-cell:nth-of-type(even){
 					background-color: #D1C9DE;
