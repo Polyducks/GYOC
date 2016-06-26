@@ -25,7 +25,7 @@ var plantData = [
 		"south"			: [
 			//_____________________________________________________________________
 			//JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
-			 "SI", "SI", "SI", "NO", "NO", "PO", "PO", "NO", "HR", "HR", "NO", "NO"
+			 "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO", "HR", "HR", "NO", "NO"
 		]
 	},
 	{

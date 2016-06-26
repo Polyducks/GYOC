@@ -158,13 +158,14 @@ MAIN
 					PopulateChart();
 				}
 			}
-			//Pick up when the radio buttons change via click or keypress
+			//when the radio buttons change via click or keypress
 			el.locationContainer.addEventListener("click", function(e){
 				LocationChange();
 			});
 			el.locationContainer.addEventListener("keyup", function(e){
 				LocationChange();
 			});
+			
 			
 			//REDIRECT CLICKS TO THE SCROLL CONTAINER TO THE CORRECT ITEM
 			//this saves adding an event listener to every item in the chart
