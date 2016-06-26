@@ -94,18 +94,43 @@ MAIN
 			el.scrollRight = document.getElementById("grc-scroll-right");
 			el.plantsArray = [];
 			
+			el.plantTitle = document.getElementById("grc-plant-title");
 			el.chartButton = document.getElementById("grc-chart-button");
 			el.buyButton = document.getElementById("grc-buy-button");
 			el.articleButton = document.getElementById("grc-article-button");
+			el.articleButtonText = document.getElementById("grc-article-button-text");
 			
 			el.chart = document.getElementById("grc-table");
 			el.chart.rows = document.getElementById("grc-data-rows");
+
+		/*--------------------------------------------
+		USEFUL FUNCTIONS
+		--------------------------------------------*/
+		
+			//CHECK IF ITEM IS IN CHART
+			var ItemInChart = function( plantID ){
+				var index = chartArray.indexOf( plantID );
+				if ( index == -1 ){
+					return -1;
+				}
+				return index;
+			}
+
+			//STYLE THE ADD/REMOVE BUTTON
+			function StyleAddRemoveButton(){
+				if ( ItemInChart( selected ) >= 0 ){
+					Add_Class(el.chartButton, "in-chart");
+				}else{
+					Remove_Class(el.chartButton, "in-chart");
+				}
+			}
 		
 		/*--------------------------------------------
 		INITIALISE
 		--------------------------------------------*/
 		function Init(){
 			PopulatePlants();
+			
 			//event listeners
 			function handleClicks(e) {
 				var path = [];
@@ -133,6 +158,8 @@ MAIN
 				PlantClicked(clickedElement);
 			});
 			
+			PlantClicked(el.plantsArray[0]); //load the first plant
+			
 			//SCROLL LEFT
 			el.scrollLeft.addEventListener("click", function(){
 				var amount = scrollAmount + settings.plantPercentWidth;
@@ -154,43 +181,21 @@ MAIN
 				}
 			});
 
-			/*------------------------
-			CHECK IF ITEM IS IN CHART
-			------------------------*/
-			var ItemInChart = function( plantID ){
-				var index = chartArray.indexOf( plantID );
-				if ( index == -1 ){
-					return false;
-				}
-				return index;
-			}
-
 			//BUTTON TO ADD/REMOVE PLANTS
 			el.chartButton.addEventListener("click", function(){
 				var plantID = parseInt(this.getAttribute("data-plant-id"));
 				//check to see if the item is in the chart
 				var chartLocation = ItemInChart( plantID );
-				if (chartLocation){//is in chart
+				if (chartLocation>=0){//is in chart
 					chartArray.splice(chartLocation, 1);
 				}else{
 					chartArray.push( plantID );
 					chartArray.sort();
 				}
-				
-				//make a function to add/remove the the class
-				//to visually style this. Return whether it's already
-				//in the array
-				
-				/*if (Find_Class(this, 'in-chart')){
-					Remove_Class(this, 'in-chart');
-					var index = chartArray.indexOf( plantID );
-					chartArray.splice(index, 1);
-				}else{
-					Add_Class(this, 'in-chart');
-					chartArray.push( plantID );
-					chartArray.sort();
-				}*/
 				PopulateChart();
+				StyleAddRemoveButton();
+				
+				
 			});
 			
 		}
@@ -252,9 +257,13 @@ MAIN
 			}
 			Add_Class(element, 'selected');
 			selected = plantID;
+			
+			el.plantTitle.innerHTML = plantData[plantID].name;
 			//populate the buttons with relevant content
 			el.chartButton.setAttribute("data-plant-id", plantID);
+			StyleAddRemoveButton();
 			el.buyButton.href = plantData[plantID].buy_link;
+			el.articleButton.innerHTML = plantData[plantID].article_title;
 			el.articleButton.href = plantData[plantID].article_link;
 		}
 		

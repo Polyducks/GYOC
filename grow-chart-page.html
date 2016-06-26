@@ -14,7 +14,7 @@
 		<h1>Create your own Grow chart</h1>
 		<p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet</p>
 		
-		<div id="grc-scroll">
+		<div id="grc-scroll"><!-- list of plants for the user to chose from -->
 			<div id="grc-scroll-controls">
 				<div id="grc-scroll-left" class="grc-scroll-button"></div>
 				<div id="grc-scroll-right" class="grc-scroll-button"></div>
@@ -32,11 +32,18 @@
 			</div>
 		</div>
 		
-		<div id="grc-chart-button" class="grc-button"><span class="grc-button-icon"></span>Add to chart</div>
-		<a id="grc-buy-button" class="grc-button" href=""><span class="grc-button-icon"></span>Buy online</a>
-		<a id="grc-article-button" class="grc-button" href=""><span class="grc-button-icon"></span>Growing cabbage for fun</a>
+		<!--plant title hidden by default. Added incase it was needed-->
+		<h2 id="grc-plant-title"><!--content changes dynamically--></h2>
 		
-	</div><!--grc-input-->
+		<div id="grc-chart-button" class="grc-button"><span class="grc-button-icon"></span><!--Add to chart (see CSS)--></div>
+		<a id="grc-buy-button" class="grc-button" href=""><span class="grc-button-icon"></span>Buy online</a>
+		<a id="grc-article-button" class="grc-button" href="">
+			<span class="grc-button-icon"></span>
+			<span id="grc-article-button-text"><!--content changes dynamically--></span>
+		</a>
+		
+	</div><!--/grc-input-->
+	
 	<div id="grc-output">
 	
 		<h1 id="grc-result-title">Your personalised grow chart</h1>
@@ -50,6 +57,7 @@
 		<div id="grc-table">
 			<div id="grc-top-row" class="grc-row">
 				<div class="grc-cell"></div>
+				<!--month names added in CSS to be responsive-->
 				<div class="grc-cell"></div><!--j-->
 				<div class="grc-cell"></div><!--f-->
 				<div class="grc-cell"></div><!--m-->
@@ -81,9 +89,9 @@
 					<div class="grc-cell grc-symbol-NO"></div>
 					<div class="grc-cell grc-symbol-NO"></div>
 				</div>-->
-			</div>
-		</div>
+			</div><!--/grc-data-rows-->
+		</div><!--/grc-table-->
 	
-	</div><!--grc-output-->
+	</div><!--/grc-output-->
 	
 </div>

@@ -53,7 +53,9 @@
 		/*------------------------
 		BUTTONS
 		------------------------*/
-		/* ADD TO CHART */
+		/* ADD TO CHART / REMOVE FROM CHART */
+		
+			/* ADD TO CHART */
 			#grc-chart-button{
 				background-color: #64A70A;
 			}
@@ -63,6 +65,18 @@
 				#grc-chart-button .grc-button-icon{
 					background-image: url('resources/placeholder.png');
 				}
+			#grc-chart-button::after{
+				display: inline-block;
+				content: 'Add to chart';
+			}
+			/* REMOVE FROM CHART */
+			#grc-chart-button.in-chart{
+				background-color: red;
+			}
+			#grc-chart-button.in-chart::after{
+				display: inline-block;
+				content: 'Remove from chart';
+			}
 		
 		/* BUY */
 			#grc-buy-button{
@@ -118,7 +132,6 @@
 				transform: translateY(-50%);
 				width: 10%;
 				height: 100%;
-				/*background-color: #4C2776;*/
 				max-height: 100%;
 				cursor: pointer;
 				background-color: rgba(255,255,255,1);
@@ -179,6 +192,10 @@
 		/*------------------------
 		ELEMENTS
 		------------------------*/
+		#grc-plant-title{ /* hidden to fit design. Might want to know what plant is being displayed */
+			display: none;
+		}
+		
 		#grc-scroll-element-container{
 			position: relative;
 			top: 0;
@@ -320,16 +337,34 @@
 					webkit-transform: translateX(-50%)translateY(-50%);
 					transform: translateX(-50%)translateY(-50%);
 				}
-					#grc-top-row .grc-cell:nth-of-type(2):before{content:"Jan";}
-					#grc-top-row .grc-cell:nth-of-type(3):before{content:"Feb";}
-					#grc-top-row .grc-cell:nth-of-type(4):before{content:"Mar";}
-					#grc-top-row .grc-cell:nth-of-type(5):before{content:"Apr";}
-					#grc-top-row .grc-cell:nth-of-type(6):before{content:"May";}
-					#grc-top-row .grc-cell:nth-of-type(7):before{content:"Jun";}
-					#grc-top-row .grc-cell:nth-of-type(8):before{content:"Jul";}
-					#grc-top-row .grc-cell:nth-of-type(9):before{content:"Aug";}
-					#grc-top-row .grc-cell:nth-of-type(10):before{content:"Sep";}
-					#grc-top-row .grc-cell:nth-of-type(11):before{content:"Oct";}
-					#grc-top-row .grc-cell:nth-of-type(12):before{content:"Nov";}
-					#grc-top-row .grc-cell:nth-of-type(13):before{content:"Dec";}
-					
+/*-----------------------
+MEDIA QUERIES 
+-----------------------*/
+@media (min-width: 601px){
+	#grc-top-row .grc-cell:nth-of-type(2):before{content:"Jan";}
+	#grc-top-row .grc-cell:nth-of-type(3):before{content:"Feb";}
+	#grc-top-row .grc-cell:nth-of-type(4):before{content:"Mar";}
+	#grc-top-row .grc-cell:nth-of-type(5):before{content:"Apr";}
+	#grc-top-row .grc-cell:nth-of-type(6):before{content:"May";}
+	#grc-top-row .grc-cell:nth-of-type(7):before{content:"Jun";}
+	#grc-top-row .grc-cell:nth-of-type(8):before{content:"Jul";}
+	#grc-top-row .grc-cell:nth-of-type(9):before{content:"Aug";}
+	#grc-top-row .grc-cell:nth-of-type(10):before{content:"Sep";}
+	#grc-top-row .grc-cell:nth-of-type(11):before{content:"Oct";}
+	#grc-top-row .grc-cell:nth-of-type(12):before{content:"Nov";}
+	#grc-top-row .grc-cell:nth-of-type(13):before{content:"Dec";}
+}
+@media (max-width: 600px){
+	#grc-top-row .grc-cell:nth-of-type(2):before{content:"J";}
+	#grc-top-row .grc-cell:nth-of-type(3):before{content:"F";}
+	#grc-top-row .grc-cell:nth-of-type(4):before{content:"M";}
+	#grc-top-row .grc-cell:nth-of-type(5):before{content:"A";}
+	#grc-top-row .grc-cell:nth-of-type(6):before{content:"M";}
+	#grc-top-row .grc-cell:nth-of-type(7):before{content:"J";}
+	#grc-top-row .grc-cell:nth-of-type(8):before{content:"J";}
+	#grc-top-row .grc-cell:nth-of-type(9):before{content:"A";}
+	#grc-top-row .grc-cell:nth-of-type(10):before{content:"S";}
+	#grc-top-row .grc-cell:nth-of-type(11):before{content:"O";}
+	#grc-top-row .grc-cell:nth-of-type(12):before{content:"N";}
+	#grc-top-row .grc-cell:nth-of-type(13):before{content:"D";}
+}

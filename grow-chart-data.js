@@ -32,7 +32,7 @@ var plantData = [
 		"name" 			: "Basil",
 		"img"			: "http://i1.adis.ws/i/wgc/veg001",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Basil for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
@@ -49,7 +49,7 @@ var plantData = [
 		"name" 			: "Beetroot",
 		"img"			: "http://i1.adis.ws/i/wgc/veg002",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Beetroot for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
@@ -66,7 +66,7 @@ var plantData = [
 		"name" 			: "Broccoli",
 		"img"			: "http://i1.adis.ws/i/wgc/veg003",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Broccoli for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
@@ -83,7 +83,7 @@ var plantData = [
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Cabbage for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
@@ -100,7 +100,7 @@ var plantData = [
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Cabbage for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
@@ -117,7 +117,7 @@ var plantData = [
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Cabbage for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
@@ -134,7 +134,7 @@ var plantData = [
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Cabbage for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
@@ -151,7 +151,7 @@ var plantData = [
 		"name" 			: "Cabbage",
 		"img"			: "http://i1.adis.ws/i/wgc/veg004",
 		"buy_link"		: "http://www.google.co.uk",
-		"article_title" : "Grow Aubergine for fun and profit",
+		"article_title" : "Grow Cabbage for fun and profit",
 		"article_link" 	: "http://www.google.co.uk",
 		"north"			: [
 			//_____________________________________________________________________
