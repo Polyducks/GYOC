@@ -116,11 +116,13 @@ MAIN
 				return index;
 			}
 
-			//STYLE THE ADD/REMOVE BUTTON
+			//CHANGE STYLES ON CHART ADD/REMOVE
 			function StyleAddRemoveButton(){
 				if ( ItemInChart( selected ) >= 0 ){
+					Add_Class(el.plantsArray[selected], "active");
 					Add_Class(el.chartButton, "in-chart");
 				}else{
+					Remove_Class(el.plantsArray[selected], "active");
 					Remove_Class(el.chartButton, "in-chart");
 				}
 			}
