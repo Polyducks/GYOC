@@ -88,6 +88,9 @@ MAIN
 		var scrollAmount = 0; //how far the selector is scrolled by
 		
 		var el = {};
+			el.locationContainer = document.getElementById("grc-location-container");
+			el.locationButtons = document.getElementsByClassName("grc-location-radio");
+			
 			el.scrollContainer = document.getElementById("grc-scroll-element-container");
 			el.scrollPlants = document.getElementsByClassName("grc-scroll-plant");
 			el.scrollLeft = document.getElementById("grc-scroll-left");
@@ -144,7 +147,26 @@ MAIN
 				return path;
 			}
 			
-			//REDIRECT CLICKS TO THE SCROLL CONTAINER TO THE RIGHT ITEM
+			//ON CHANGE OF THE LOCATION
+			function LocationChange(){
+				var loc = "north";
+				if (el.locationButtons[1].checked){
+					loc = "south";
+				}
+				if (settings.location != loc){ //If the location has changed, do something
+					settings.location = loc;
+					PopulateChart();
+				}
+			}
+			//Pick up when the radio buttons change via click or keypress
+			el.locationContainer.addEventListener("click", function(e){
+				LocationChange();
+			});
+			el.locationContainer.addEventListener("keyup", function(e){
+				LocationChange();
+			});
+			
+			//REDIRECT CLICKS TO THE SCROLL CONTAINER TO THE CORRECT ITEM
 			//this saves adding an event listener to every item in the chart
 			el.scrollContainer.addEventListener("click", function(e){
 				var clickedElement;
@@ -196,8 +218,6 @@ MAIN
 				}
 				PopulateChart();
 				StyleAddRemoveButton();
-				
-				
 			});
 			
 		}
