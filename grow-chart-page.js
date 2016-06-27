@@ -248,7 +248,26 @@ MAIN
 				var leftOffset = settings.plantPercentWidth *id;
 				scrollPlant.style.cssText = "left:" + leftOffset + "%";
 				el.scrollContainer.appendChild(scrollPlant);
-				el.plantsArray.push(document.getElementById("grc-plant-" + id));
+				el.plantsArray.push(document.getElementById("grc-plant-" + id));				
+				/* IF I FIND LIFE'S CONSOLE
+					If(I could start my life again){
+						I'd do it differently
+						I'd be born into a rich
+						&& famous
+						loving family
+					}else{
+						start again at bottom rung
+						and earn my own applause;
+						and fill my name in triplicate
+						upon life's highest scores
+					}
+					But if I'm being honest,
+					set attractive attribute to true
+					for (x in females){
+						do sex() lots
+						take break() if cock is blue
+					}
+				*/
 			}
 			
 			//go through the plant list and send data to the DOM constructor
