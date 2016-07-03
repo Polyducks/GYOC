@@ -102,6 +102,7 @@ MAIN
 			el.buyButton = document.getElementById("grc-buy-button");
 			el.articleButton = document.getElementById("grc-article-button");
 			el.articleButtonText = document.getElementById("grc-article-button-text");
+			el.clearButton = document.getElementById("grc-clear-chart");
 			
 			el.chart = document.getElementById("grc-table");
 			el.chart.rows = document.getElementById("grc-data-rows");
@@ -221,11 +222,60 @@ MAIN
 				StyleAddRemoveButton();
 			});
 			
-		}
+			//BUTTON TO CLEAR CHART
+			el.clearButton.addEventListener("click", function(){
+				//function used for flipping between the two available texts
+				function SwitchText(){
+					var existingText = el.clearButton.innerHTML;
+					el.clearButton.innerHTML = el.clearButton.getAttribute("data-alternative-text");
+					el.clearButton.setAttribute("data-alternative-text", existingText);
+				}
+				//reset the button to its initial state
+				function ResetButton(){
+					//return the status to not asked
+					el.clearButton.removeAttribute("data-ask-if-sure");
+					//switch back tot he original text
+					SwitchText();
+				}
+				
+				//check if user has been asked if they're sure they want to delete the chart
+				var sure = el.clearButton.getAttribute("data-ask-if-sure");
+				
+				if (!sure){
+					//set the status to asked
+					el.clearButton.setAttribute("data-ask-if-sure", true);
+					//change to alternative text
+					SwitchText();
+					//add a timeout to the button
+					el.clearButton.uncertaintyTimeout = setTimeout(function(){
+						//reset the button
+						ResetButton();
+					},3000);
+				}else{
+					//clear the chart
+					chartArray.length = 0;
+					PopulateChart();
+					//restyle the add/remove
+					StyleAddRemoveButton();
+					//remove all the 'active' classes from the plant elements
+					for ( var i = 0; i < el.plantsArray.length; i++){
+						Remove_Class(el.plantsArray[i], "active");
+					}
+					//reset the button
+					ResetButton();
+					//kill the uncertainty timer that already exist
+					clearTimeout(el.clearButton.uncertaintyTimeout);
+				}
+				
+			});
+			
+			PopulateChart();
+			
+		}//END INIT
 		
 		//POPULATE THE PLANT MENU
 		function PopulatePlants(){
-			
+		
 			//function used for creating new plant elements
 			function CreateElements(imgSrc, plantName, id){
 				//.grc-scroll-plant element
@@ -248,29 +298,10 @@ MAIN
 				var leftOffset = settings.plantPercentWidth *id;
 				scrollPlant.style.cssText = "left:" + leftOffset + "%";
 				el.scrollContainer.appendChild(scrollPlant);
-				el.plantsArray.push(document.getElementById("grc-plant-" + id));				
-				/* IF I FIND LIFE'S CONSOLE
-					If(I could start my life again){
-						I'd do it differently
-						I'd be born into a rich
-						&& famous
-						loving family
-					}else{
-						start again at bottom rung
-						and earn my own applause;
-						and fill my name in triplicate
-						upon life's highest scores
-					}
-					But if I'm being honest,
-					set attractive attribute to true
-					for (x in females){
-						do sex() lots
-						take break() if cock is blue
-					}
-				*/
+				el.plantsArray.push(document.getElementById("grc-plant-" + id));
 			}
 			
-			//go through the plant list and send data to the DOM constructor
+			//go through the plant list and send data to the DOM constructor "CreateElements()"
 			for (var i = 0; i < plantData.length; i++){
 				(function(){
 					var imgSrc = plantData[i].img;
@@ -353,6 +384,12 @@ MAIN
 			for ( var i = 0; i < chartArray.length; i++ ){
 				AddRow(chartArray[i]);
 			}
+			
+			Remove_Class(el.chart, "grc-empty");
+			if (chartArray.length==0){
+				Add_Class(el.chart, "grc-empty");
+			}
+			
 		}
 
 		Init();

@@ -99,6 +99,21 @@
 				#grc-article-button .grc-button-icon{
 					background-image: url('resources/placeholder.png');
 				}
+		
+		/* CLEAR CHART */
+			#grc-clear-chart{
+				display: table;
+				background-color: #DDD;
+				margin: 10px auto;
+				padding: 20px 60px;
+				transition: 1s all ease-in-out;
+			}
+				#grc-clear-chart:hover{
+					background-color: #EEE;
+				}
+				#grc-clear-chart[data-ask-if-sure]{
+					background-color: red;
+				}
 	
 	/*------------------------------------------------------
 	SLIDER
@@ -284,6 +299,9 @@
 			display: block;
 			overflow: auto;
 			width: 100%;
+		}
+		#grc-table.grc-empty{
+			display: none;
 		}
 			.grc-row{
 				width: 100%;
