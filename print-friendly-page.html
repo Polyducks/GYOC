@@ -1,0 +1,70 @@
+<!--
+
+	All IDs and classes for this project are prefixed with 'grc' to prevent a clash with other
+	styles and scripts. Please maintain this format in future edits.
+
+-->
+
+<link rel="stylesheet" type="text/css" href="grow-chart-page.css"/>
+<script src="grow-chart-data.js"></script>
+<script src="print-friendly-page.js"></script>
+
+<div id="grc">
+	
+	<!--This element is hidden, revealed in the event of an error-->
+	<div id="grc-error" class="grc-hidden">
+		<p>It appears you have arrived here by mistake! This page should give you information about which 
+		vegetables you'd like to grow. However, <span id="grc-error-info"></span></p>
+		<p>Your best bet would be to return to the grow-your-own chart and trying again. If this error 
+		persists, please let a member of our team know via the contact us details.</p>
+	</div><!--/grc-error-->
+	
+	<div id="grc-output">
+
+		<h1 id="grc-result-title">Your personalised Wyevale grow chart</h1>
+		
+		<div id="grc-key">
+			Add your key here
+			<!--LOVE YOU JAMES!-->
+		</div>
+		
+		<div id="grc-table">
+			<div id="grc-top-row" class="grc-row">
+				<div class="grc-cell"></div>
+				<!--month names added in CSS to be responsive-->
+				<div class="grc-cell"></div><!--j-->
+				<div class="grc-cell"></div><!--f-->
+				<div class="grc-cell"></div><!--m-->
+				<div class="grc-cell"></div><!--a-->
+				<div class="grc-cell"></div><!--m-->
+				<div class="grc-cell"></div><!--j-->
+				<div class="grc-cell"></div><!--j-->
+				<div class="grc-cell"></div><!--a-->
+				<div class="grc-cell"></div><!--s-->
+				<div class="grc-cell"></div><!--o-->
+				<div class="grc-cell"></div><!--n-->
+				<div class="grc-cell"></div><!--d-->
+			</div>
+			<div id="grc-data-rows">
+				<!--dynamically added-->
+				<!--NB: see CSS/data for what the class names means-->
+				<!--<div class="grc-row">
+					<div class="grc-cell grc-symbol-SI"></div>
+					<div class="grc-cell grc-symbol-NO"></div>
+					<div class="grc-cell grc-symbol-NO"></div>
+					<div class="grc-cell grc-symbol-NO"></div>
+					<div class="grc-cell grc-symbol-NO"></div>
+					<div class="grc-cell grc-symbol-SC"></div>
+					<div class="grc-cell grc-symbol-SO"></div>
+					<div class="grc-cell grc-symbol-PI"></div>
+					<div class="grc-cell grc-symbol-PO"></div>
+					<div class="grc-cell grc-symbol-HR"></div>
+					<div class="grc-cell grc-symbol-NO"></div>
+					<div class="grc-cell grc-symbol-NO"></div>
+					<div class="grc-cell grc-symbol-NO"></div>
+				</div>-->
+			</div><!--/grc-data-rows-->
+		</div><!--/grc-table-->
+
+	</div><!--/grc-output-->
+</div><!--grc-->

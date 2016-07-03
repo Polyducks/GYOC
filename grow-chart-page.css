@@ -19,6 +19,10 @@
 	/*----------------------------
 	GENERIC ITEMS
 	----------------------------*/
+	.grc-hidden{
+		display: none;
+	}
+	
 	.grc-button{
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;

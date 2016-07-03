@@ -1,5 +1,3 @@
-//on resize, slider should return to 0
-
 /*-------------------------------------------------------------
 SETTINGS
 -------------------------------------------------------------*/
@@ -42,7 +40,10 @@ TOOLS
 		}
 		targetElement.className += prefixedSpace + className;
 	}
-
+	
+	/*------------------------
+	FIND CLASS
+	------------------------*/
 	var Find_Class = function(targetElement, className){
 		var regex = new RegExp( "^(" + className + ")|\\s+(" + className + ")", "g" );
 		if (targetElement.className.match(regex)){
