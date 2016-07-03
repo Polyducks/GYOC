@@ -386,3 +386,12 @@ MEDIA QUERIES
 	#grc-top-row .grc-cell:nth-of-type(12):before{content:"N";}
 	#grc-top-row .grc-cell:nth-of-type(13):before{content:"D";}
 }
+
+@media(max-width: 748px){
+	#grc-scroll-element-container{
+		padding-top: 60%;
+	}
+		.grc-scroll-plant{
+			width: 50%;
+		}
+}

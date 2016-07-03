@@ -6,6 +6,7 @@ SETTINGS
 	var growchart_settings = {};
 	//the 'print chart' URL
 	growchart_settings.printURL = "http://polyducks.co.uk/growchart/print-chart.html";
+	growchart_settings.mobileBreakpoint = 759;
 
 /*-------------------------------------------------------------
 TOOLS
@@ -137,18 +138,24 @@ MAIN
 		function Init(){
 			PopulatePlants();
 			
-			//event listeners
-			function handleClicks(e) {
-				var path = [];
-				var node = e.target;
-				while(node != el.scrollContainer) {
-				   path.push(node);
-				   node = node.parentNode;
-				}
-				return path;
-			}
+			/*----------------------------------------
+			EVENT LISTENERS
+			----------------------------------------*/
 			
-			//ON CHANGE OF THE LOCATION
+			//ON WINDOW RESIZE
+			function ResponsiveReaction(){
+				if (window.innerWidth >= growchart_settings.mobileBreakpoint){
+					settings.plantPercentWidth = 20;
+				}else{
+					settings.plantPercentWidth = 50;
+				}
+				SetScroll(0);
+			}
+			window.addEventListener("resize", function(){
+				ResponsiveReaction();
+			});
+			
+			//ON CHANGE OF THE UK LOCATION
 			function LocationChange(){
 				var loc = "north";
 				if (el.locationButtons[1].checked){
@@ -167,10 +174,20 @@ MAIN
 				LocationChange();
 			});
 			
-			
 			//REDIRECT CLICKS TO THE SCROLL CONTAINER TO THE CORRECT ITEM
 			//this saves adding an event listener to every item in the chart
 			el.scrollContainer.addEventListener("click", function(e){
+				//trace the route of the click
+				function handleClicks(e) {
+					var path = [];
+					var node = e.target;
+					while(node != el.scrollContainer) {
+					   path.push(node);
+					   node = node.parentNode;
+					}
+					return path;
+				}
+
 				var clickedElement;
 				var clickPath = handleClicks(e);
 				for (var i = 0; i < clickPath.length; i++){
@@ -269,6 +286,9 @@ MAIN
 				
 			});
 			
+			//makes sure the slider items are positioned correctly
+			ResponsiveReaction();
+			//empty and format the chart
 			PopulateChart();
 			
 		}//END INIT
