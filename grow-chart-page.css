@@ -286,6 +286,10 @@
 		#grc-print{
 			float: right;
 		}
+		#grc-print:not([href=""]){ /* styles when the link is ready */
+			background-color: red;
+		}
+		
 		#grc-key{
 			width: 100%;
 			background-color: #4C2079;
