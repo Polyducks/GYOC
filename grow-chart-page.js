@@ -3,7 +3,7 @@ SETTINGS
 -------------------------------------------------------------*/
 	var growchart_settings = {};
 	//the 'print chart' URL
-	growchart_settings.printURL = "http://polyducks.co.uk/growchart/print-chart.html";
+	growchart_settings.printURL = "print-friendly-page.html";
 	growchart_settings.mobileBreakpoint = 759;
 
 /*-------------------------------------------------------------
@@ -106,6 +106,7 @@ MAIN
 			el.articleButtonText = document.getElementById("grc-article-button-text");
 			el.clearButton = document.getElementById("grc-clear-chart");
 			
+			el.printButton = document.getElementById("grc-print");
 			el.chart = document.getElementById("grc-table");
 			el.chart.rows = document.getElementById("grc-data-rows");
 
@@ -411,6 +412,40 @@ MAIN
 				Add_Class(el.chart, "grc-empty");
 			}
 			
+			UpdatePrintButton();
+			
+		}
+
+		//----------------------------------
+		//EXPORT FUNCTION
+		//----------------------------------
+		function GetExportURL(){
+			if (chartArray.length>0){
+				var queryString = "?val=";
+				for (x in chartArray){
+					queryString += chartArray[x].toString();
+					if (x != chartArray.length-1){
+						queryString += "&";
+					}
+				}
+				queryString += "n=";
+				if (settings.location == "north"){
+					queryString += "1";
+				}else{
+					queryString += "0";
+				}
+				
+				var URL = growchart_settings.printURL + queryString;
+			}else{
+				return "";
+			}
+			
+			return URL;
+			
+		}
+		
+		function UpdatePrintButton(){
+			el.printButton.href = GetExportURL();
 		}
 
 		Init();
