@@ -320,38 +320,57 @@
 					position: relative;
 					overflow: hidden;
 					width: 7.69%;
-					height: 40px;
+					min-height: 40px;
 					float: left;
 					background-color: #EBE8F1;
-					background-size: contain;
-					background-position: center;
-					background-repeat: no-repeat;
 					text-align: center;
 				}
 				.grc-row .grc-cell:nth-of-type(even){
 					background-color: #D1C9DE;
 				}
-				/* CHART SYMBOLS */
-				.grc-row .grc-cell.grc-symbol-NO{ /* an empty chart symbol */
-				}
-				.grc-row .grc-cell.grc-symbol-SI{ /* sow indoors */
-					background-image: url(resources/placeholder.png);
-				}
-				.grc-row .grc-cell.grc-symbol-SC{ /* sow under cloche */
-					background-image: url(resources/placeholder.png);
-				}
-				.grc-row .grc-cell.grc-symbol-SO{ /* sow outdoors */
-					background-image: url(resources/placeholder.png);
-				}
-				.grc-row .grc-cell.grc-symbol-PI{ /* plant indoors */
-					background-image: url(resources/placeholder.png);
-				}
-				.grc-row .grc-cell.grc-symbol-PO{ /* plant outdoors */
-					background-image: url(resources/placeholder.png);
-				}
-				.grc-row .grc-cell.grc-symbol-HR{ /* harvest */
-					background-image: url(resources/placeholder.png);
-				}				
+					/* CHART SYMBOLS */
+					.grc-row .grc-icon{
+						padding-top: 20px;
+						width: 30%;
+						background-size: contain;
+						background-repeat: no-repeat;
+						background-position: center;
+						float: left;
+						margin: 10px 2.5% 0 2.5%;
+					}
+					.grc-row .grc-icon-count-1{
+						float: none;
+						margin: 10px auto 0;
+					}
+					.grc-row .grc-icon-count-2{
+						width: 45%;
+					}
+					.grc-row .grc-icon-count-3{
+						width: 27%;
+					}
+					/* the grc-icon-count-x is automatically generated, so it could go up to grc-icon-count-102 etc */
+					
+					
+					.grc-row .grc-icon.grc-symbol-NO{ /* an empty chart symbol */
+					}
+					.grc-row .grc-icon.grc-symbol-SI{ /* sow indoors */
+						background-image: url(resources/placeholder.png);
+					}
+					.grc-row .grc-icon.grc-symbol-SC{ /* sow under cloche */
+						background-image: url(resources/placeholder.png);
+					}
+					.grc-row .grc-icon.grc-symbol-SO{ /* sow outdoors */
+						background-image: url(resources/placeholder.png);
+					}
+					.grc-row .grc-icon.grc-symbol-PI{ /* plant indoors */
+						background-image: url(resources/placeholder.png);
+					}
+					.grc-row .grc-icon.grc-symbol-PO{ /* plant outdoors */
+						background-image: url(resources/placeholder.png);
+					}
+					.grc-row .grc-icon.grc-symbol-HR{ /* harvest */
+						background-image: url(resources/placeholder.png);
+					}
 				
 				/* HEADER SPECIFIC */
 				#grc-top-row .grc-cell:before{

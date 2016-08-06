@@ -178,9 +178,12 @@ MAIN
 					}else{
 						locationGrowData = plantData[plantID].north;
 					}
-					//output the cell's class based on the grow data
-					var monthClass = "grc-symbol-" + locationGrowData[j-1];
-					Add_Class(children[j], monthClass);
+					var growIcons = locationGrowData[j-1].split(" ");
+					for (x in growIcons){
+						var newIcon = document.createElement("DIV");
+						newIcon.className = "grc-icon grc-symbol-" + growIcons[x] + " grc-icon-count-" + growIcons.length;
+						children[j].appendChild(newIcon);
+					}
 				}
 				el.chart.rows.appendChild(row);
 			}
